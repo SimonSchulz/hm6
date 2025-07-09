@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { HttpStatus } from "../../../core/types/http-statuses";
 import { LoginDto } from "../../dto/login.dto";
-import { authService } from "../../application/authService";
+import { authService } from "../../application/auth.service";
 import { AuthorizationError } from "../../../core/utils/app-response-errors";
 
 export async function authLoginHandler(

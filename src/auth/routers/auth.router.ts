@@ -4,6 +4,8 @@ import { loginOrEmailValidation } from "../../user/validation/login.or.emaol.val
 import { inputValidationResultMiddleware } from "../../core/utils/input-validtion-result.middleware";
 
 import { authLoginHandler } from "./handlers/login-handler";
+import {accessTokenGuard} from "./guards/access.token.guard";
+import {getUserDataHandler} from "./handlers/get-user-data.handler";
 
 export const authRouter = Router();
 
@@ -13,4 +15,9 @@ authRouter.post(
   loginOrEmailValidation,
   inputValidationResultMiddleware,
   authLoginHandler,
+);
+authRouter.get(
+    '/auth/me',
+    accessTokenGuard,
+    getUserDataHandler,
 );
