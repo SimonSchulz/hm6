@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import {
   AUTH_PATH,
-  BLOGS_PATH,
+  BLOGS_PATH, COMMENT_PATH,
   POSTS_PATH,
   TESTING_PATH,
   USER_PATH,
@@ -12,6 +12,7 @@ import { testingRouter } from "./testing/testing.router";
 import { errorHandlerMiddleware } from "./core/utils/error-handler-middleware";
 import { usersRouter } from "./user/routers/users.router";
 import { authRouter } from "./auth/routers/auth.router";
+import {commentsRouter} from "./comments/routers/comment.router";
 
 export const setupApp = (app: Express) => {
   app.use(express.json());
@@ -23,6 +24,7 @@ export const setupApp = (app: Express) => {
   app.use(BLOGS_PATH, blogsRouter);
   app.use(POSTS_PATH, postsRouter);
   app.use(USER_PATH, usersRouter);
+  app.use(COMMENT_PATH, commentsRouter);
   app.use(TESTING_PATH, testingRouter);
   // @ts-ignore
   app.use(errorHandlerMiddleware);
