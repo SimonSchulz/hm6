@@ -34,9 +34,9 @@ postsRouter
     )
     .post(
         '/:postId/comments',
+        accessTokenGuard,
         contentValidation,
         inputValidationResultMiddleware,
-        accessTokenGuard,
         createCommentByPostIdHandler,
     )
 
