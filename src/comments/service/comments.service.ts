@@ -16,10 +16,15 @@ export const commentsService = {
     ): Promise<{ items: WithId<Comment>[]; totalCount: number }> {
         return commentsQueryRepository.findCommentsByPostId(postId, queryDto);
     },
-    async create( dto: CommentInputDto, info: CommentatorInfo, postId: string): Promise<WithId<{postId: string}>> {
+    async create( dto: CommentInputDto, info: CommentatorInfo, postId: string): Promise<WithId<Comment>> {
+        console.log(info);
+        const userInfo = {
+           userId: info.userId,
+            userLogin: info.userLogin,
+        }
         let newComment: Comment= {
             content: dto.content,
-            commentatorInfo: info,
+            commentatorInfo: userInfo,
             createdAt: new Date().toISOString(),
             postId: postId
         };
