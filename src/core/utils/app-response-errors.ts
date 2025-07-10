@@ -26,3 +26,9 @@ export class AuthorizationError extends AppError {
     super(HttpStatus.Unauthorized, message);
   }
 }
+export class ForbiddenError extends AppError {
+  constructor(message = "Access denied") {
+    super(HttpStatus.Forbidden, message);
+  }
+}
+
