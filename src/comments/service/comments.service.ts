@@ -3,9 +3,6 @@ import {WithId} from "mongodb";
 import { CommentInputDto} from "../dto/comment.input-dto";
 import {commentsRepository} from "../repositories/comment.repo";
 import {CommentatorInfo} from "../types/CommentatorInfo";
-import {PostQueryInput} from "../../posts/types/post-query.input";
-import {Post} from "../../posts/types/post";
-import {postsRepository} from "../../posts/repositories/post.repository";
 import {commentsQueryRepository} from "../repositories/comment.query.repo";
 import {CommentQueryInput} from "../types/comment-query.input";
 
