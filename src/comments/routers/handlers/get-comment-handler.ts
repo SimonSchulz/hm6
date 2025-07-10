@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { NotFoundError } from "../../../core/utils/app-response-errors";
 import {commentsService} from "../../service/comments.service";
+import {mapToCommentViewModel} from "../../helpers/map-to-comment-view-model";
 
 export async function getCommentHandler(
     req: Request,
@@ -13,7 +14,7 @@ export async function getCommentHandler(
         if (!comment) {
             throw new NotFoundError("Comment not found");
         }
-        res.send(comment);
+        res.send(mapToCommentViewModel(comment));
     } catch (e: unknown) {
         next(e);
     }
