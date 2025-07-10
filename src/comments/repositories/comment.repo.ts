@@ -1,16 +1,16 @@
-import { commentCollection } from "../../db/mongodb";
+import {commentCollection} from "../../db/mongodb";
 import {ObjectId, WithId} from "mongodb";
 import {Comment} from "../types/comment";
-import { CommentInputDto} from "../dto/comment.input-dto";
+import {CommentInputDto} from "../dto/comment.input-dto";
 
 export const commentsRepository = {
     async findByIdOrFail(id: string):  Promise<WithId<Comment> | null>  {
         return commentCollection.findOne({_id: new ObjectId(id)});
     },
 
-    async create(newComment: Comment): Promise<WithId<Comment>> {
+    async create(newComment: Comment): Promise<WithId<{postId: string}>> {
         const insertResult = await commentCollection.insertOne(newComment);
-        return { ...newComment, _id: insertResult.insertedId };
+        return {postId: insertResult.insertedId.toString()};
     },
     async delete(id: string): Promise <void> {
         const deleteResult = await commentCollection.deleteOne({
