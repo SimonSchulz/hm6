@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {authMiddleware} from "../../auth/auth-middleware";
-import {idValidation} from "../../core/utils/params-id.validation";
+import {idValidation, blogIdValidation} from "../../core/utils/params-id.validation";
 import {getBlogsHandler} from "./handlers/get-blogs.handler";
 import {getBlogHandler} from "./handlers/get-blog.handler";
 import {inputValidationResultMiddleware} from "../../core/utils/input-validtion-result.middleware";
@@ -13,7 +13,6 @@ import {
     postInputDtoValidation,
     postInputDtoWithoutBlogIdValidation
 } from "../../posts/validation/post.input-dto.validation";
-import { blogIdValidation } from "../../posts/validation/post.input-dto.validation"
 import {createPostByBlogIdHandler} from "./handlers/create-post-by-blogId";
 
 export const blogsRouter = Router({});

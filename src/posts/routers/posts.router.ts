@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {authMiddleware} from "../../auth/auth-middleware";
-import {idValidation} from "../../core/utils/params-id.validation";
+import {idValidation, postIdValidation} from "../../core/utils/params-id.validation";
 import {inputValidationResultMiddleware} from "../../core/utils/input-validtion-result.middleware";
 import {postInputDtoValidation} from "../validation/post.input-dto.validation";
 import {getPostHandler} from "./handlers/get-post.handler";
@@ -8,6 +8,9 @@ import {getPostsHandler} from "./handlers/get-posts.handler";
 import {createPostHandler} from "./handlers/create-post.handler";
 import {updatePostHandler} from "./handlers/update-post.handler";
 import {deletePostHandler} from "./handlers/delete-post.handler";
+import {contentValidation} from "../../comments/validation/comment.input-dto.validation";
+import {accessTokenGuard} from "../../auth/routers/guards/access.token.guard";
+import {createCommentByPostIdHandler} from "./handlers/create-comment.handler";
 
 
 export const postsRouter = Router({});
@@ -16,6 +19,7 @@ postsRouter
     .get('', getPostsHandler)
 
     .get('/:id', idValidation, inputValidationResultMiddleware, getPostHandler)
+    .get('/:postId/comments', postIdValidation, inputValidationResultMiddleware, getPostHandler)
 
     .post(
         '',
@@ -23,6 +27,14 @@ postsRouter
         postInputDtoValidation,
         inputValidationResultMiddleware,
         createPostHandler,
+    )
+    .post(
+        '/:postId/comments',
+        authMiddleware,
+        contentValidation,
+        inputValidationResultMiddleware,
+        accessTokenGuard,
+        createCommentByPostIdHandler,
     )
 
     .put(

@@ -14,7 +14,6 @@ export const accessTokenGuard = async (
 
     const payload = await jwtService.verifyToken(token);
     if (!payload) throw new AuthorizationError();
-
-    res.locals.userId = payload.userId;
+    res.locals.userInfo = payload;
     next();
 };

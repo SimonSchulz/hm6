@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import {SETTINGS} from "../../core/setting/setting";
+import {CommentatorInfo} from "../../comments/types/CommentatorInfo";
 
 export const jwtService = {
     async createToken(userId: string): Promise<string> {
@@ -15,9 +16,9 @@ export const jwtService = {
             return null;
         }
     },
-    async verifyToken(token: string): Promise<{ userId: string } | null> {
+    async verifyToken(token: string): Promise<CommentatorInfo | null> {
         try {
-            return jwt.verify(token, SETTINGS.AC_SECRET) as { userId: string };
+            return jwt.verify(token, SETTINGS.AC_SECRET) as CommentatorInfo;
         } catch (error) {
             console.error("Token verify some error");
             return null;
