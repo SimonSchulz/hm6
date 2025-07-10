@@ -7,7 +7,6 @@ export function mapToCommentViewModel(comment: WithId<Comment>): CommentViewMode
         id: comment._id.toString(),
         commentatorInfo: comment.commentatorInfo,
         content: comment.content,
-        postId: comment.postId,
         createdAt: comment.createdAt,
     };
 }
