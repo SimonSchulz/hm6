@@ -8,12 +8,12 @@ import {CommentatorInfo} from "../../../comments/types/CommentatorInfo";
 import {mapToCommentViewModel} from "../../../comments/helpers/map-to-comment-view-model";
 
 export async function createCommentByPostIdHandler(
-    req: Request<{ PostId: string }, {}, PostInputDto>,
+    req: Request<{ postId: string }, {}, PostInputDto>,
     res: Response,
     next: NextFunction,
 ) {
     try {
-        const postId = req.params.PostId;
+        const postId = req.params.postId;
         let post = await postService.findByIdOrFail(postId);
         if (!post) {
             throw new NotFoundError("Post with this Id not found");
